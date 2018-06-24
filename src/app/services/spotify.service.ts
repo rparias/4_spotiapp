@@ -12,24 +12,27 @@ export class SpotifyService {
 
   constructor( private http: HttpClient ) { }
 
-  getNewReleases() {
+  getQuery(query: string) {
+
+    const url = `https://api.spotify.com/v1/${query}`;
 
     const headers = new HttpHeaders({
       // tslint:disable-next-line:max-line-length
-      'Authorization': 'Bearer BQBxVCumCHSv2tgPldS9hlBqcnDIRk_6qDOI2wzXcRyJbOZYjxgJQ4qrPiWYXkL9_nm0JkqP_vZoZ_llkCYPghLtAteIGadlhWxayEVsr7URvJg1J2xlBxmUuTErwgK4JR2ZGscVZZ7DPSYi'
+      'Authorization': 'Bearer BQDTofQY_1qaIYXPgGl7RtpZ8DezxpaRaz1dwORJ_WTaLKNdm09y7w7eid2su3jGwwf_erhA1gabmOcYkmQ'
     });
 
-    return this.http.get('https://api.spotify.com/v1/browse/new-releases', { headers })
-        .pipe( map( data => data['albums'].items ) );
+    return this.http.get(url, { headers });
+  }
+
+  getNewReleases() {
+
+    return this.getQuery('browse/new-releases')
+      .pipe( map( data => data['albums'].items ) );
   }
 
   getArtista(termino: string) {
-    const headers = new HttpHeaders({
-      // tslint:disable-next-line:max-line-length
-      'Authorization': 'Bearer BQBxVCumCHSv2tgPldS9hlBqcnDIRk_6qDOI2wzXcRyJbOZYjxgJQ4qrPiWYXkL9_nm0JkqP_vZoZ_llkCYPghLtAteIGadlhWxayEVsr7URvJg1J2xlBxmUuTErwgK4JR2ZGscVZZ7DPSYi'
-    });
 
-    return this.http.get(`https://api.spotify.com/v1/search?q=${termino}&type=artist&limit=15`, { headers })
-        .pipe( map( data =>  data['artists'].items ) );
+    return this.getQuery(`search?q=${termino}&type=artist&limit=15`)
+      .pipe( map( data =>  data['artists'].items ) );
   }
 }
