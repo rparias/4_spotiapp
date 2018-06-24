@@ -18,7 +18,7 @@ export class SpotifyService {
 
     const headers = new HttpHeaders({
       // tslint:disable-next-line:max-line-length
-      'Authorization': 'Bearer BQDx3oy_6P7OAurO1L-Mx3bv8eL2bOkJjXy7Tb-8ubwRmaUFzrvFre5w2B2uPshfdrPn13POwqgzkmztHKg'
+      'Authorization': 'Bearer BQCwbwytuP2gmf5ck3LoUFVROH6f-8_7MbJ9P-Uy-kqHV7IWI-WzvCaCZHNwZ6g7IWVi2godCWelzWkJVR8'
     });
 
     return this.http.get(url, { headers });
